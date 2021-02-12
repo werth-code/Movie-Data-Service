@@ -15,23 +15,15 @@ import java.util.List;
 @RequestMapping("/ratingsdata")
 public class RatingsDataResource {
 
-//    @Autowired
-//    private RestTemplate restTemplate;
-
-    @RequestMapping("/{movieID}")
-    public Rating getRating(@PathVariable("movieID") String movieID) {
-        return new Rating(movieID, 4);
+    @RequestMapping("/movies/{movieId}")
+    public Rating getMovieRating(@PathVariable("movieId") String movieId) {
+        return new Rating(movieId, 4);
     }
 
     @RequestMapping("/users/{userID}")
-    public UserRating getUser(@PathVariable("userID") String userID) {
-        List<Rating> ratings = Arrays.asList(     // this is hardcoded example of api response
-                new Rating("123", 5),
-                new Rating("234", 4),
-                new Rating("345", 3)
-        );
+    public UserRating getUserRating(@PathVariable("userID") String userID) {
         UserRating userRating = new UserRating();
-        userRating.setUserRating(ratings);
+        userRating.initData(userID);
         return userRating;
     }
 }
